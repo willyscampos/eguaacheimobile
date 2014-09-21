@@ -9,135 +9,222 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
-        <div data-role="page" id="page1">
-            <div data-theme="e" data-role="header">
-                <h3>
-                    Welcome!
-                </h3>
-            </div>
-            <div data-role="content">
-                <div>
-                    <b>
-                        This is your Nomad project...
-                    </b>
-                </div>
-                <ul data-role="listview" data-divider-theme="e" data-inset="true">
-                    <li data-role="list-divider" role="heading">
-                        Getting Started
-                    </li>
-                    <li data-theme="c">
-                        <a href="http://www.vsnomad.com/documentation" target="_newtab">
-                            Read the guide
-                        </a>
-                    </li>
-                    <li data-theme="c">
-                        <a href="http://vsnomad.zendesk.com/" target="_newtab">
-                            Report a problem
-                        </a>
-                    </li>
-                    <li data-theme="c">
-                        Hit the build button and try it on a device!
-                    </li>
-                </ul>
-
-                <hr />
-
-                <ul data-role="listview" data-divider-theme="e">
-                    <li data-role="list-divider" role="heading">
-                        Device Information
-                    </li>
-                    <li>
-                        <h3>Compass heading: <span id="heading">n/a</span></h3>
-                        <p>Uses compass.watchHeading</p>
-                    </li>
-                    <li>
-                        <h3>Connection type: <span id="connection">n/a</span></h3>
-                        <p>Uses connection.type</p>
-                    </li>
-                    <li data-theme="c">
-                        <h3>Contacts: <span id="contacts">n/a</span></h3>
-                        <p>Uses navigator.contacts.find</p>
-                    </li>
-                    <li data-theme="c">
-                        <h3>Device properties:</h3>
-                        <p>Uses device.*</p>
-                        <div id="deviceprops" style="font-size: 11px;">n/a</div>
-                    </li>
-                    <li data-theme="c">
-                        <h3>Geolocation: <span id="geolocation">n/a</span></h3>
-                        <p>Uses navigator.geolocation.watchPosition</p>
-                    </li>
-                    <li data-theme="c">
-                        <img alt="" src="images/choosephoto.png" id="picture" /><button data-role="button" data-inline="true" onclick="showPictures();">
-                            Choose a picture
-                        </button>
-                        <p><span id="geolocationerror"></span></p>
-                    </li>
-                </ul>
-            </div>
-            <div data-theme="a" data-role="footer">
-            </div>
-
-            <script type="text/javascript">
-                function showPictures() {
-                    navigator.camera.getPicture(function (imageURI) {
-                        $('img#picture').attr('src', imageURI);
-                    }, function (error) {
-                        $('img#picture').replaceWith('<p>' + error + '</p>');
-                    }, { sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY, destinationType: navigator.camera.DestinationType.FILE_URI });
-                }
-
-                $(function () {
-                    var compassWatchID, geoWatchID;
-
-                    document.addEventListener("deviceready", function () {
-                        // Compass
-                        compassWatchID = navigator.compass.watchHeading(function (heading) {
-                            $('span#heading').html(heading.magneticHeading.toFixed(2) + '&#176;');
-                        }, function (error) {
-                            $('span#heading').text(error.code);
-                        }, { frequency: 3000 });
-
-                        // Connection
-                        var networkState = navigator.network.connection.type,
-                            states = {};
-
-                        states[Connection.UNKNOWN] = 'Unknown';
-                        states[Connection.ETHERNET] = 'Ethernet';
-                        states[Connection.WIFI] = 'WiFi';
-                        states[Connection.CELL_2G] = 'Cell 2G';
-                        states[Connection.CELL_3G] = 'Cell 3G';
-                        states[Connection.CELL_4G] = 'Cell 4G';
-                        states[Connection.NONE] = 'No network';
-
-                        $('span#connection').text(states[networkState]);
-
-                        // Contacts
-                        navigator.contacts.find(['displayName', 'email'], function (contacts) {
-                            $('span#contacts').text(contacts.length + ' found');
-                        }, function (error) {
-                            $('span#contacts').text(error.code);
-                        }, { multiple: true });
-
-                        // Device properties
-                        $('div#deviceprops').html(
-                            '<strong>Name:</strong> ' + device.name + '<br/>' +
-                            '<strong>Cordova version:</strong> ' + device.cordova + '<br/>' +
-                            '<strong>Platform:</strong> ' + device.platform + '<br/>' +
-                            '<strong>UUID:</strong> ' + device.uuid + '<br/>' +
-                            '<strong>Version:</strong> ' + device.version + '<br/>'
-                        );
-
-                        // Geolocation
-                        geoWatchID = navigator.geolocation.watchPosition(function (position) {
-                            $('span#geolocation').text(position.coords.latitude.toFixed(2) + 'N, ' + position.coords.longitude.toFixed(2) + 'E');
-                        }, function (error) {
-                            $('span#geolocationerror').text(error.code + ': ' + error.message);
-                        }, { frequency: 3000 });
-                    });
-                } ());
-            </script>
+    <div data-role="page" id="page1">
+        <div data-theme="e" data-role="header">
+            <h3>Welcome!
+            </h3>
         </div>
+        <div data-role="content">
+            <div>
+                <b>This is your Nomad project...
+                </b>
+            </div>
+            <ul data-role="listview" data-divider-theme="e" data-inset="true">
+                <li data-role="list-divider" role="heading">Getting Started
+                </li>
+                <li data-theme="c">
+                    <a href="http://www.vsnomad.com/documentation" target="_newtab">Read the guide
+                    </a>
+                </li>
+                <li data-theme="c">
+                    <a href="http://vsnomad.zendesk.com/" target="_newtab">Report a problem
+                    </a>
+                </li>
+                <li data-theme="c">Hit the build button and try it on a device!
+                </li>
+            </ul>
+
+            <hr />
+
+            <ul data-role="listview" data-divider-theme="e">
+                <li data-role="list-divider" role="heading">Device Information
+                </li>
+                <li>
+                    <h3>Compass heading: <span id="heading">n/a</span></h3>
+                    <p>Uses compass.watchHeading</p>
+                </li>
+                <li>
+                    <h3>Connection type: <span id="connection">n/a</span></h3>
+                    <p>Uses connection.type</p>
+                </li>
+                <li data-theme="c">
+                    <h3>Contacts: <span id="contacts">n/a</span></h3>
+                    <p>Uses navigator.contacts.find</p>
+                </li>
+                <li data-theme="c">
+                    <h3>Device properties:</h3>
+                    <p>Uses device.*</p>
+                    <div id="deviceprops" style="font-size: 11px;">n/a</div>
+                </li>
+                <li data-theme="c">
+                    <h3>Geolocation: <span id="geolocation">n/a</span></h3>
+                    <p>Uses navigator.geolocation.watchPosition</p>
+                </li>
+                <li data-theme="c">
+                    <img alt="" src="images/choosephoto.png" id="picture" />
+                    <button data-role="button" data-inline="true" onclick="showPictures();">
+                        Choose a picture
+                    </button>
+                    <p><span id="geolocationerror"></span></p>
+                </li>
+            </ul>
+
+            <button onclick="capturePhoto();">Capture Photo</button>
+            <br>
+            <button onclick="capturePhotoEdit();">Capture Editable Photo</button>
+            <br>
+            <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
+            <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
+            <img style="display: none; width: 60px; height: 60px;" id="smallImage" src="" />
+            <img style="display: none;" id="largeImage" src="" />
+        </div>
+        <div data-theme="a" data-role="footer">
+        </div>
+
+        <script type="text/javascript">
+            function showPictures() {
+                navigator.camera.getPicture(function (imageURI) {
+                    $('img#picture').attr('src', imageURI);
+                }, function (error) {
+                    $('img#picture').replaceWith('<p>' + error + '</p>');
+                }, { sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY, destinationType: navigator.camera.DestinationType.FILE_URI });
+            }
+
+
+            // willys start
+            function onPhotoDataSuccess(imageData) {
+                // Uncomment to view the base64-encoded image data
+                // console.log(imageData);
+
+                // Get image handle
+                //
+                var smallImage = document.getElementById('smallImage');
+
+                // Unhide image elements
+                //
+                smallImage.style.display = 'block';
+
+                // Show the captured photo
+                // The inline CSS rules are used to resize the image
+                //
+                smallImage.src = "data:image/jpeg;base64," + imageData;
+            }
+
+            // Called when a photo is successfully retrieved
+            //
+            function onPhotoURISuccess(imageURI) {
+                // Uncomment to view the image file URI
+                // console.log(imageURI);
+
+                // Get image handle
+                //
+                var largeImage = document.getElementById('largeImage');
+
+                // Unhide image elements
+                //
+                largeImage.style.display = 'block';
+
+                // Show the captured photo
+                // The inline CSS rules are used to resize the image
+                //
+                largeImage.src = imageURI;
+            }
+
+            // A button will call this function
+            //
+            function capturePhoto() {
+                // Take picture using device camera and retrieve image as base64-encoded string
+                navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+                    quality: 50,
+                    destinationType: destinationType.DATA_URL
+                });
+            }
+
+            // A button will call this function
+            //
+            function capturePhotoEdit() {
+                // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
+                navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+                    quality: 20, allowEdit: true,
+                    destinationType: destinationType.DATA_URL
+                });
+            }
+
+            // A button will call this function
+            //
+            function getPhoto(source) {
+                // Retrieve image file location from specified source
+                navigator.camera.getPicture(onPhotoURISuccess, onFail, {
+                    quality: 50,
+                    destinationType: destinationType.FILE_URI,
+                    sourceType: source
+                });
+            }
+
+            // Called if something bad happens.
+            //
+            function onFail(message) {
+                alert('Failed because: ' + message);
+            }
+            // willys end
+
+            $(function () {
+                var compassWatchID, geoWatchID;
+
+                document.addEventListener("deviceready", function () {
+                    // Compass
+                    compassWatchID = navigator.compass.watchHeading(function (heading) {
+                        $('span#heading').html(heading.magneticHeading.toFixed(2) + '&#176;');
+                    }, function (error) {
+                        $('span#heading').text(error.code);
+                    }, { frequency: 3000 });
+
+                    // Connection
+                    var networkState = navigator.network.connection.type,
+                        states = {};
+
+                    states[Connection.UNKNOWN] = 'Unknown';
+                    states[Connection.ETHERNET] = 'Ethernet';
+                    states[Connection.WIFI] = 'WiFi';
+                    states[Connection.CELL_2G] = 'Cell 2G';
+                    states[Connection.CELL_3G] = 'Cell 3G';
+                    states[Connection.CELL_4G] = 'Cell 4G';
+                    states[Connection.NONE] = 'No network';
+
+                    // camera willys
+                    var pictureSource = navigator.camera.PictureSourceType;
+                    var destinationType = navigator.camera.DestinationType;
+
+
+
+                    $('span#connection').text(states[networkState]);
+
+                    // Contacts
+                    navigator.contacts.find(['displayName', 'email'], function (contacts) {
+                        $('span#contacts').text(contacts.length + ' found');
+                    }, function (error) {
+                        $('span#contacts').text(error.code);
+                    }, { multiple: true });
+
+                    // Device properties
+                    $('div#deviceprops').html(
+                        '<strong>Name:</strong> ' + device.name + '<br/>' +
+                        '<strong>Cordova version:</strong> ' + device.cordova + '<br/>' +
+                        '<strong>Platform:</strong> ' + device.platform + '<br/>' +
+                        '<strong>UUID:</strong> ' + device.uuid + '<br/>' +
+                        '<strong>Version:</strong> ' + device.version + '<br/>'
+                    );
+
+                    // Geolocation
+                    geoWatchID = navigator.geolocation.watchPosition(function (position) {
+                        $('span#geolocation').text(position.coords.latitude.toFixed(2) + 'N, ' + position.coords.longitude.toFixed(2) + 'E');
+                    }, function (error) {
+                        $('span#geolocationerror').text(error.code + ': ' + error.message);
+                    }, { frequency: 3000 });
+                });
+            }());
+        </script>
+    </div>
 </body>
 </html>
 
