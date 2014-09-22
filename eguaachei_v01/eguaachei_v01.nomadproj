@@ -21,11 +21,44 @@
     <Content Include="config.xml">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="hello.html">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="index.html" />
     <Content Include="cordova.js">
       <SubType>Content</SubType>
     </Content>
     <Content Include="images\choosephoto.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="jquery.mobile\images\ajax-loader.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="jquery.mobile\images\icons-18-black.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="jquery.mobile\images\icons-18-white.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="jquery.mobile\images\icons-36-black.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="jquery.mobile\images\icons-36-white.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="jquery.mobile\jquery.mobile-1.0rc2.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="jquery.mobile\jquery.mobile-1.0rc2.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="jquery.mobile\jquery.mobile-1.0rc2.min.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="jquery.mobile\jquery.mobile-1.0rc2.min.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="scripts\javascript.js">
       <SubType>Content</SubType>
     </Content>
     <Content Include="scripts\jquery-1.6.4.js">
@@ -94,6 +127,8 @@
     <Folder Include="icons\android\" />
     <Folder Include="icons\ios\" />
     <Folder Include="images" />
+    <Folder Include="jquery.mobile" />
+    <Folder Include="jquery.mobile\images" />
     <Folder Include="style" />
     <Folder Include="scripts" />
   </ItemGroup>
